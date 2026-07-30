@@ -1,0 +1,55 @@
+{
+  "profile": "HVE Embedded Profile 1.0",
+  "description": "Deterministic golden test vectors for cross-implementation conformance.",
+  "base_vectors": [
+    {"state": {"theta": 0, "s": 0, "tau": 0, "phi": 0}, "index": 0},
+    {"state": {"theta": 0, "s": 0, "tau": 0, "phi": 8}, "index": 8},
+    {"state": {"theta": 0, "s": 1, "tau": 0, "phi": 0}, "index": 45},
+    {"state": {"theta": 123, "s": 1, "tau": 2, "phi": 7}, "index": 11140},
+    {"state": {"theta": 359, "s": 1, "tau": 4, "phi": 8}, "index": 32399}
+  ],
+  "chi_vectors": [
+    {
+      "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
+      "color": {"present": false, "r": 0, "g": 0, "b": 0},
+      "chi_index": 0,
+      "kappa": 0
+    },
+    {
+      "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
+      "color": {"present": true, "r": 0, "g": 0, "b": 0},
+      "chi_index": 1,
+      "kappa": 1
+    },
+    {
+      "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
+      "color": {"present": true, "r": 1, "g": 2, "b": 3},
+      "chi_index": 65795,
+      "kappa": 65795
+    },
+    {
+      "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
+      "color": {"present": true, "r": 255, "g": 255, "b": 255},
+      "chi_index": 16777216,
+      "kappa": 16777216
+    },
+    {
+      "state": {"theta": 359, "s": 1, "tau": 4, "phi": 8},
+      "color": {"present": false, "r": 0, "g": 0, "b": 0},
+      "chi_index": 543581813983,
+      "kappa": 0
+    },
+    {
+      "state": {"theta": 359, "s": 1, "tau": 4, "phi": 8},
+      "color": {"present": true, "r": 0, "g": 0, "b": 0},
+      "chi_index": 543581813984,
+      "kappa": 1
+    },
+    {
+      "state": {"theta": 359, "s": 1, "tau": 4, "phi": 8},
+      "color": {"present": true, "r": 255, "g": 255, "b": 255},
+      "chi_index": 543581830799,
+      "kappa": 16777216
+    }
+  ]
+}

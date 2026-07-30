@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "name": "HVE-720 Canonical States — Sample",
+    "description": "First 10 and last 10 of the 32,400 canonical HVE states. The full table is generated at runtime via hve.canonical.generate_canonical_table().",
+    "version": "1.0.0",
+    "total_states": 32400,
+    "group": "G = Z_360 × Z_2 × Z_5 × Z_9",
+    "encoding": "mixed-radix: index = (((θ·2 + s)·5 + τ)·9 + φ)",
+    "word_bits": 15,
+    "reserved_words": 368
+  },
+  "sample_states_first_10": [
+    {"index": 0,     "theta": 0, "s": 0, "tau": 0, "phi": 0, "sigma": 1},
+    {"index": 1,     "theta": 0, "s": 0, "tau": 0, "phi": 1, "sigma": 1},
+    {"index": 2,     "theta": 0, "s": 0, "tau": 0, "phi": 2, "sigma": 1},
+    {"index": 3,     "theta": 0, "s": 0, "tau": 0, "phi": 3, "sigma": 1},
+    {"index": 4,     "theta": 0, "s": 0, "tau": 0, "phi": 4, "sigma": 1},
+    {"index": 5,     "theta": 0, "s": 0, "tau": 0, "phi": 5, "sigma": 1},
+    {"index": 6,     "theta": 0, "s": 0, "tau": 0, "phi": 6, "sigma": 1},
+    {"index": 7,     "theta": 0, "s": 0, "tau": 0, "phi": 7, "sigma": 1},
+    {"index": 8,     "theta": 0, "s": 0, "tau": 0, "phi": 8, "sigma": 1},
+    {"index": 9,     "theta": 0, "s": 0, "tau": 1, "phi": 0, "sigma": 1}
+  ],
+  "sample_states_last_10": [
+    {"index": 32390, "theta": 359, "s": 1, "tau": 3, "phi": 8, "sigma": -1},
+    {"index": 32391, "theta": 359, "s": 1, "tau": 4, "phi": 0, "sigma": -1},
+    {"index": 32392, "theta": 359, "s": 1, "tau": 4, "phi": 1, "sigma": -1},
+    {"index": 32393, "theta": 359, "s": 1, "tau": 4, "phi": 2, "sigma": -1},
+    {"index": 32394, "theta": 359, "s": 1, "tau": 4, "phi": 3, "sigma": -1},
+    {"index": 32395, "theta": 359, "s": 1, "tau": 4, "phi": 4, "sigma": -1},
+    {"index": 32396, "theta": 359, "s": 1, "tau": 4, "phi": 5, "sigma": -1},
+    {"index": 32397, "theta": 359, "s": 1, "tau": 4, "phi": 6, "sigma": -1},
+    {"index": 32398, "theta": 359, "s": 1, "tau": 4, "phi": 7, "sigma": -1},
+    {"index": 32399, "theta": 359, "s": 1, "tau": 4, "phi": 8, "sigma": -1}
+  ]
+}

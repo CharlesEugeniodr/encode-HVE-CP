@@ -1,0 +1,117 @@
+HVE ENGINE 1.0 TEST REPORT
+==========================
+Date: 2026-07-30
+
+Environment
+-----------
+Python:   3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026) [MSC v.1944 64 bit (AMD64)]
+pytest:   9.1.0
+OS:       Windows-11-10.0.26200-SP0
+CPU:      ARMv8 (64-bit) Family 8 Model 1 Revision 201, Qualcomm Technologies Inc
+Machine:  ARM64
+
+Commit:   73c8514a (tag: v1.0.0-rc1)
+
+Test Structure
+--------------
+Test files:            7
+Test functions:      227
+Collected items:     234 (parametrized expansion: +7 from test_protocol.py::test_roundtrip)
+
+Breakdown by file:
+  test_ai_mapping.py:    48 functions
+  test_angular.py:       65 functions
+  test_canonical.py:     22 functions
+  test_chromatic.py:     17 functions
+  test_core.py:          29 functions
+  test_harmonic.py:      26 functions
+  test_protocol.py:      20 functions (1 parametrized -> 8 items)
+
+Note on 23 vs 234:
+  The original build collected 23 test items from 4 files (core, angular,
+  harmonic, chromatic).  After adding test_protocol (27 items),
+  test_ai_mapping (48 items), test_canonical (22 items), and additional
+  test functions in the existing modules, the total grew to 234 collected
+  items.  No tests were removed; only added.
+
+Python Test Results
+-------------------
+Collected: 234 items
+Passed:    234
+Failed:      0
+Duration:  7.33 s
+
+Key validations:
+  BASE exhaustive round-trip:       32,400 / 32,400
+  Reserved 15-bit words rejected:      368 / 368
+  Harmonic DFT/IDFT full group:     passed
+  Separable transform equivalence:  passed
+  Parseval:                         passed
+  Convolution theorem impulse:      passed
+  Orthogonality (analytical):       passed
+  Chromatic randomized round-trips: 100,000 passed
+  Protocol/CRC tests:               passed
+  Canonical positions:              720 unique positions
+  AI mapping interface/registry:    passed
+
+MICRO/NANO resolution:
+  DEFAULT_MICRO_DIVISIONS:  1,000  (|Z_{360,000}|)
+  DEFAULT_NANO_DIVISIONS:   1,080  (|Z_{388,800,000}|)
+  |G_MICRO| = 32,400,000
+  |G_NANO|  = 34,992,000,000
+
+CLI
+---
+hve validate:
+  valid_states:      32,400
+  reserved_rejected:    368
+  failures:               0
+
+Host Implementation Diagnostic Benchmark
+-----------------------------------------
+Python:     3.13.14
+OS:         Windows-11-10.0.26200-SP0
+CPU:        ARMv8 (64-bit) Family 8 Model 1 Rev 201, Qualcomm
+Machine:  ARM64
+Iterations: 100,000
+Warm-up:    10,000
+
+  BASE encode:       2,414.8 ns/op    414,117 ops/s
+  BASE decode:       1,622.5 ns/op    616,322 ops/s
+  BASE round-trip:   3,294.2 ns/op    303,568 ops/s
+
+NOTE: These are host implementation diagnostics, not intrinsic
+HVE performance claims.  Results depend on Python version, CPU,
+OS, system load, and interpreter configuration.
+
+C11 Reference Core
+------------------
+Status:  IMPLEMENTED -- NOT EXECUTED IN THIS ENVIRONMENT
+
+Files:
+  csrc/hve_core.h        Header-only C11 library
+  csrc/hve_test.c        Exhaustive test (32,400 round-trips + 368 rejections)
+  csrc/CMakeLists.txt    CMake with -Wall -Wextra -Wpedantic -Werror
+
+To verify on a system with a C11 compiler:
+  cmake -S csrc -B build-c
+  cmake --build build-c
+  ctest --test-dir build-c --output-on-failure
+
+The C11 core will receive PASS status after successful execution on
+at least one toolchain (GCC, Clang, or MSVC) and ideally via
+GitHub Actions CI on Linux.
+
+DeterministicMapper
+-------------------
+confidence: 1.0 (exact table lookup in hve720-canonical v1.0.0)
+provenance includes: table_id, table_version, mapping_type
+
+Notes
+-----
+- No physical hardware benchmark is claimed.
+- No trained machine-learning model was used or claimed.
+- MICRO/NANO use integer coordinates in Z_{360m}, not floats.
+- quantize_micro/quantize_nano accept float input but produce
+  integer tuples.  IEEE 754 truncation at m=1000 boundaries is
+  documented in test comments.

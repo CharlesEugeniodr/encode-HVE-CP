@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "HVE-720 Engine: Harmonic Vector Encoding"
+version: 1.0.0
+date-released: 2026-07-19
+license: MIT
+repository-code: "https://github.com/CharlesEugeniodr/hve-engine"
+authors:
+  - family-names: "Eugênio"
+    given-names: "Charles de Paula"
+keywords:
+  - encoding
+  - finite-group
+  - bijection
+  - mixed-radix
+  - harmonic-analysis
+  - discrete-mathematics
+abstract: >-
+  HVE-720 is a deterministic bijective encoding architecture over the
+  finite Abelian group G = Z_360 × Z_2 × Z_5 × Z_9 (cardinality 32,400).
+  It provides mixed-radix state encoding, circular geometry on C_360,
+  Fourier analysis on G, and a pointed chromatic extension (543 billion states).
