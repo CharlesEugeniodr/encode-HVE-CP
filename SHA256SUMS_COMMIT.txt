@@ -1,0 +1,4 @@
+d8d9c10dbe321085e70790bb3f93c594d70fc83aece3320ee76f6050ab36dd6c  README_COMMIT_HVE_2.5.md
+ccf26c2bac86bb457d5ce088fe9e7aacdfec2a24201c3469eca9ddd96e68c804  0001-feat-hve-2.5-add-heterogeneous-perceptual-architecture.patch
+3dd6fe5035af15a17a06c8186f3e92264f50ce0058ee729bb49c2743de037fc9  hve-engine-v2.5-article-architecture.bundle
+8b72d769c0fb34e40be8281dc13c3bd58cf1482beefdb063618510158a0ee8da  hve-engine-v2.5.0-article-architecture-source-evidence.zip

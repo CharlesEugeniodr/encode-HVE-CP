@@ -1,0 +1,321 @@
+{
+  "schema": "hve/article-architecture/v1",
+  "engine_version": "2.5.0",
+  "release_date": "2026-08-01",
+  "repository": {
+    "name": "hve-engine",
+    "canonical_url": "https://github.com/CharlesEugeniodr/hve-engine",
+    "integration_base": "2.4.0",
+    "integration_mode": "versioned extension; never a nested Git repository"
+  },
+  "article": {
+    "title_pt": "HVE 2.5: Geometria computacional finita com transporte cromático heterogêneo e condutância perceptual",
+    "title_en": "HVE 2.5: Finite Computational Geometry with Heterogeneous Chromatic Transport and Perceptual Conductance",
+    "pages_pt": 55,
+    "pages_en": 54,
+    "architecture_sequence": [
+      "finite_core",
+      "refined_geometry",
+      "structural_graphs",
+      "declared_perceptual_conductance",
+      "external_typed_conversion",
+      "control",
+      "representation",
+      "evidence"
+    ],
+    "artifacts": [
+      {
+        "name": "Artigo_HVE_2.5_Transporte_Heterogeneo_Condutancia_Perceptual_PT.pdf",
+        "media_type": "application/pdf",
+        "size_bytes": 3730400,
+        "sha256": "b74b39a33322168bd759750bf2f201af14d9a0e31998d2ccf3822b02cca82929"
+      },
+      {
+        "name": "Artigo_HVE_2.5_Transporte_Heterogeneo_Condutancia_Perceptual_PT.docx",
+        "media_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size_bytes": 3356795,
+        "sha256": "d77a65305b87ddd8ac86a4e36cb9567b65e54282363e65bfa407bbead30c716c"
+      },
+      {
+        "name": "HVE_2.5_Heterogeneous_Transport_Perceptual_Conductance_EN.pdf",
+        "media_type": "application/pdf",
+        "size_bytes": 3647192,
+        "sha256": "3dbbc8a20bf1a2b7d31cf47da37850b5aa832b1d9915fa52323880a135ec0b73"
+      },
+      {
+        "name": "HVE_2.5_Heterogeneous_Transport_Perceptual_Conductance_EN.docx",
+        "media_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size_bytes": 3276612,
+        "sha256": "61e8b3ac784030491bb5cfc51005d166f16b98f3011cd75b2d46dca8f4fd9085"
+      },
+      {
+        "name": "hve-engine-v2.5.0-heterogeneous-perceptual-source-evidence.zip",
+        "media_type": "application/zip",
+        "size_bytes": 5319269,
+        "sha256": "b74d2215bd99bbc396b6992f339407e65599e2850fe49e7ad7288c507f2f2e3b"
+      }
+    ]
+  },
+  "finite_core": {
+    "group": "Z_360 x Z_2 x Z_5 x Z_9",
+    "cardinality": 32400,
+    "visible_angular_states": 720,
+    "canonical_layout": {
+      "id": "canonical-doc-v1",
+      "formula": "phi*3600 + tau*720 + s*360 + theta"
+    },
+    "legacy_layout": {
+      "id": "engine-v1-legacy",
+      "formula": "(((theta*2+s)*5+tau)*9+phi)",
+      "auto_detection_forbidden": true
+    },
+    "reserved_base15_words": 368,
+    "efq_classification": "classical, deterministic, quantized, bit-encoded"
+  },
+  "refined_geometry": {
+    "group": "Z_(360*1080000) x Z_2 x Z_(5*1080000) x Z_9",
+    "cardinality_decimal": "37791360000000000",
+    "raw_pointed_color_cardinality": 16777217,
+    "raw_product_cardinality_decimal": "634033847445120000000000",
+    "canonical_rank_bits": 80,
+    "canonical_rank_bytes": 10,
+    "wire_byte_order": "network/big-endian"
+  },
+  "profiled_chromatic_domain": {
+    "declared_spaces": [
+      "SRGB",
+      "DISPLAY_P3",
+      "ADOBE_RGB_1998"
+    ],
+    "cardinality": 50331649,
+    "refined_product_cardinality_decimal": "1902101466752640000000000",
+    "hypothetical_dense_rank_bits": 81,
+    "adjacency": "bounded RGB8 L1=1 inside one declared profile fiber",
+    "maximum_degree": 6,
+    "rgb_component_diameter": 765,
+    "no_color_isolated": true,
+    "uncalibrated_navigable": false,
+    "channel_wraparound": false
+  },
+  "cr88": {
+    "profile_id_hex": "0x05",
+    "physical_bits": 88,
+    "word_bytes": 11,
+    "cr80_prefix_bytes": 10,
+    "metadata_byte_offset": 10,
+    "metadata": {
+      "color_space_bits": "7..6",
+      "color_state_bits": "5..4",
+      "reserved_bits": "3..0",
+      "reserved_mask_hex": "0x0F"
+    },
+    "valid_metadata": [
+      {
+        "metadata_hex": "0x00",
+        "color_state": "NO_COLOR",
+        "color_space": "NONE",
+        "carrier": "absent"
+      },
+      {
+        "metadata_hex": "0x50",
+        "color_state": "VALID",
+        "color_space": "SRGB",
+        "carrier": "RGB24"
+      },
+      {
+        "metadata_hex": "0x90",
+        "color_state": "VALID",
+        "color_space": "DISPLAY_P3",
+        "carrier": "RGB24"
+      },
+      {
+        "metadata_hex": "0xD0",
+        "color_state": "VALID",
+        "color_space": "ADOBE_RGB_1998",
+        "carrier": "RGB24"
+      },
+      {
+        "metadata_hex": "0x20",
+        "color_state": "UNCALIBRATED",
+        "color_space": "NONE",
+        "carrier": "RGB24"
+      }
+    ],
+    "transport_color_cardinality": 67108865,
+    "transport_cardinality_decimal": "2536135276406400000000000",
+    "minimum_dense_bits_for_valid_transport_domain": 82,
+    "frame_flags": 0,
+    "payload_length_rule": "11*N",
+    "crc": {
+      "algorithm": "CRC-32/ISO-HDLC",
+      "coverage": "payload-only",
+      "header_covered": false
+    },
+    "decoder_order": [
+      "header_and_total_length",
+      "payload_crc",
+      "cr80_rank_and_metadata_truth_table"
+    ]
+  },
+  "perceptual_conductance": {
+    "profile": "hve-chi-oklab/v1",
+    "metric": "DeltaE_OK on native Oklab scale",
+    "jnd": 0.02,
+    "default_sigma": 0.01414213562373095,
+    "weight_formula": "exp(-(delta_e_ok^2)/(2*sigma^2))",
+    "changes_adjacency": false,
+    "properties": [
+      "symmetric",
+      "zero_row_sum",
+      "positive_semidefinite"
+    ]
+  },
+  "typed_conversion": {
+    "profile": "hve-convert-rgb-d65/v1",
+    "external_to_graph": true,
+    "pipeline": [
+      "decode_source_transfer_curve",
+      "convert_to_normalized_XYZ_D65",
+      "convert_to_target_linear_RGB",
+      "test_target_gamut",
+      "apply_REJECT_CLIP_or_MAP_OKLCH_MINDE",
+      "encode_target_transfer_curve",
+      "round_to_nearest_RGB8"
+    ],
+    "policies": [
+      "REJECT",
+      "CLIP",
+      "MAP_OKLCH_MINDE"
+    ],
+    "statuses": [
+      "EXACT",
+      "QUANTIZED",
+      "OUT_OF_GAMUT",
+      "CLIPPED",
+      "MAPPED"
+    ],
+    "direction_vectors": [
+      {
+        "source": "sRGB(255,0,0)",
+        "target": "Display-P3(234,51,35)",
+        "policy": "REJECT",
+        "status": "QUANTIZED"
+      },
+      {
+        "source": "Display-P3(255,0,0)",
+        "target": null,
+        "target_space": "sRGB",
+        "policy": "REJECT",
+        "status": "OUT_OF_GAMUT"
+      },
+      {
+        "source": "Display-P3(255,0,0)",
+        "target": "sRGB(255,0,0)",
+        "policy": "CLIP",
+        "status": "CLIPPED"
+      },
+      {
+        "source": "Display-P3(255,0,0)",
+        "target": "sRGB(255,11,12)",
+        "policy": "MAP_OKLCH_MINDE",
+        "status": "MAPPED"
+      }
+    ]
+  },
+  "validation": {
+    "python_tests_passed": 185,
+    "python_tests_total": 185,
+    "statement_coverage_percent": 95.37384346086522,
+    "minimum_module_coverage_percent": 90.32258064516128,
+    "ruff_findings": 0,
+    "mypy_findings": 0,
+    "mypy_files": 99,
+    "c11_test_groups_passed": 19,
+    "c11_test_groups_total": 19,
+    "cr88_random_vectors": 100000,
+    "cr88_total_vectors": 100015,
+    "cr88_python_c_mismatches": 0,
+    "cr88_stream_sha256": "2ebde32bc36716d90391ba7403c6a35a3d944d06582fd6c2bd8678e9d6848d49",
+    "golden_vectors_v25_sha256": "1fc730a80204f7f9e7eb1e83d13a6090a5d78e8cc40aed7a8f54719f033341c1",
+    "benchmark": {
+      "cpython_states": 20000,
+      "c11_states": 200000,
+      "repetitions": 31,
+      "reported_operations": 22,
+      "operations_within_predeclared_p95": 20,
+      "new_v2_5_operations_within_predeclared_p95": 10,
+      "new_v2_5_operations_total": 10,
+      "storage_overhead_cr88_vs_cr80_percent": 10,
+      "preserved_tolerance_misses": [
+        "CPython scalar Control-128/v3 encode",
+        "CPython scalar Control-128/v4 encode"
+      ],
+      "classification": "reference-host measurement; not WCET or hard-real-time evidence"
+    }
+  },
+  "repository_map": [
+    {
+      "article_scope": "finite core and canonical indexing",
+      "paths": [
+        "src/hve/core.py",
+        "src/hve/canonical.py",
+        "tests/test_core.py",
+        "tests/test_canonical.py"
+      ]
+    },
+    {
+      "article_scope": "refined geometry, graph, geodesic and harmonic operators",
+      "paths": [
+        "src/hve/refined.py",
+        "src/hve/graph.py",
+        "src/hve/harmonic.py",
+        "docs/mathematical_foundations.md"
+      ]
+    },
+    {
+      "article_scope": "control and versioned representations",
+      "paths": [
+        "src/hve/control.py",
+        "src/hve/control128.py",
+        "src/hve/chi_refined128.py",
+        "src/hve/chi_refined128_v4.py"
+      ]
+    },
+    {
+      "article_scope": "CR80, CR88 and HVE2 profiles",
+      "paths": [
+        "src/hve/chi_refined.py",
+        "src/hve/protocol.py",
+        "c/include/hve.h",
+        "c/src/hve.c",
+        "tests/golden_vectors_v25.json"
+      ]
+    },
+    {
+      "article_scope": "profiled topology, Oklab conductance and typed conversion",
+      "paths": [
+        "src/hve/chromatic_topology.py",
+        "c/src/hve.c",
+        "tests/test_hve25_cr88_conversion.py",
+        "tests/test_hve25_golden_vectors.py"
+      ]
+    },
+    {
+      "article_scope": "methodology, results and reproducibility",
+      "paths": [
+        "benchmarks/run_hve25_conformance.py",
+        "evidence/hve25_conformance.json",
+        "evidence/hve25_benchmark_summary.md",
+        "TEST_REPORT.txt"
+      ]
+    }
+  ],
+  "scientific_boundaries": [
+    "HVE is not a cryptographic primitive.",
+    "HVE is not a differentiable manifold.",
+    "HVE does not yet establish a validated semantic embedding.",
+    "Oklab is not a CIE standard.",
+    "A declared RGB profile is not measured physical-device calibration.",
+    "Reference-host benchmark percentiles are not WCET, energy, interrupt, or hard-real-time guarantees."
+  ]
+}
