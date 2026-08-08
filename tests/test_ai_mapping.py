@@ -193,7 +193,7 @@ class TestDeterministicMapper:
 
     def test_map_single_char(self, mapper: DeterministicMapper) -> None:
         result = mapper.map("A")
-        expected = decode_base(ord("A") % BASE_CARDINALITY)
+        expected = decode_base((ord("A") * 1_103_515_245) % BASE_CARDINALITY)
         assert result.state == expected
         assert result.confidence == 0.0
         assert result.alternatives == []
@@ -201,7 +201,7 @@ class TestDeterministicMapper:
     def test_map_multi_char(self, mapper: DeterministicMapper) -> None:
         result = mapper.map("AB")
         assert len(result.alternatives) == 1
-        alt_expected = decode_base(ord("B") % BASE_CARDINALITY)
+        alt_expected = decode_base((ord("B") * 1_103_515_245) % BASE_CARDINALITY)
         assert result.alternatives[0].state == alt_expected
 
     def test_map_empty_string(self, mapper: DeterministicMapper) -> None:
@@ -210,13 +210,13 @@ class TestDeterministicMapper:
 
     def test_map_unicode_char(self, mapper: DeterministicMapper) -> None:
         result = mapper.map("λ")  # U+03BB = 955
-        expected = decode_base(955 % BASE_CARDINALITY)
+        expected = decode_base((955 * 1_103_515_245) % BASE_CARDINALITY)
         assert result.state == expected
 
     def test_map_high_codepoint(self, mapper: DeterministicMapper) -> None:
         ch = chr(100_000)
         result = mapper.map(ch)
-        expected = decode_base(100_000 % BASE_CARDINALITY)
+        expected = decode_base((100_000 * 1_103_515_245) % BASE_CARDINALITY)
         assert result.state == expected
 
     # ── type errors ───────────────────────────────────────────────────
@@ -246,9 +246,13 @@ class TestRuleBasedMapper:
     def test_does_not_support_int(self, mapper: RuleBasedMapper) -> None:
         assert not mapper.supports(int)
 
-    def test_theta_is_length_mod_360(self, mapper: RuleBasedMapper) -> None:
+    def test_theta_derived_from_hash(self, mapper: RuleBasedMapper) -> None:
+        import hashlib
+        h = int.from_bytes(
+            hashlib.sha256("Hello".encode("utf-8")).digest()[:8], "big"
+        )
         result = mapper.map("Hello")
-        assert result.state.theta == len("Hello") % 360
+        assert result.state.theta == (h >> 16) % 360
 
     def test_s_uppercase(self, mapper: RuleBasedMapper) -> None:
         result = mapper.map("Abc")
@@ -273,14 +277,14 @@ class TestRuleBasedMapper:
         r2 = mapper.map("deterministic")
         assert r1.state == r2.state
 
-    def test_different_inputs_may_differ(self, mapper: RuleBasedMapper) -> None:
+    def test_different_inputs_differ(self, mapper: RuleBasedMapper) -> None:
+        # "alpha" and "zzzzz" have maximally different content.
+        # With SHA-256-derived coordinates, collision is negligible.
         r1 = mapper.map("alpha")
-        r2 = mapper.map("beta!")
-        # Not a guarantee, but extremely unlikely to collide on all coords
-        # with different length AND different hash
-        # (alpha has length 5, beta! has length 5 — they share theta,
-        #  but s or hash should differ)
-        assert r1.state != r2.state or True  # non-fatal
+        r2 = mapper.map("zzzzz")
+        assert r1.state != r2.state, (
+            f"Unexpected collision: both inputs mapped to {r1.state}"
+        )
 
     def test_empty_string(self, mapper: RuleBasedMapper) -> None:
         with pytest.raises(ValueError, match="non-empty"):

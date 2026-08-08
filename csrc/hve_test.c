@@ -32,7 +32,7 @@ static void test_exhaustive_roundtrip(void)
 {
     /* Verify perfect round-trip for all 32,400 valid states. */
     int count = 0;
-    uint8_t seen[HVE_BASE_CARD];
+    static uint8_t seen[HVE_BASE_CARD];
     memset(seen, 0, sizeof(seen));
 
     for (int theta = 0; theta < HVE_THETA_CARD; theta++) {

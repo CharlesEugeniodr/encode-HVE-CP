@@ -23,6 +23,13 @@ from hve.core import (
     decode_base,
     encode_base,
 )
+
+# LCG multiplier for spatial dispersion across the full HVE state space.
+# Without this, ord(ch) % 32400 concentrates ASCII/Latin text in states 0-255.
+_LCG_MULTIPLIER: int = 1_103_515_245
+
+# Maximum number of alternative mappings to avoid unbounded memory allocation.
+_MAX_ALTERNATIVES: int = 10
 from hve.ai_mapping.interfaces import AbstractMapper
 from hve.ai_mapping.result import MappingResult
 
@@ -119,14 +126,14 @@ class DeterministicMapper(AbstractMapper):
             raise ValueError("input string must be non-empty")
 
         def _char_to_state(ch: str) -> HVEState:
-            return decode_base(ord(ch) % BASE_CARDINALITY)
+            return decode_base((ord(ch) * _LCG_MULTIPLIER) % BASE_CARDINALITY)
 
         def _char_provenance(ch: str) -> dict:
             return {
                 "method": "unicode_codepoint_mod",
                 "char": ch,
                 "codepoint": ord(ch),
-                "index": ord(ch) % BASE_CARDINALITY,
+                "index": (ord(ch) * _LCG_MULTIPLIER) % BASE_CARDINALITY,
                 "mapping_type": "derived",
                 "collision_policy": "modulo_projection",
             }
@@ -140,7 +147,7 @@ class DeterministicMapper(AbstractMapper):
                 mapper_version=self.mapper_version,
                 provenance=_char_provenance(ch),
             )
-            for ch in text[1:]
+            for ch in text[1 : _MAX_ALTERNATIVES + 1]
         ]
 
         return MappingResult(

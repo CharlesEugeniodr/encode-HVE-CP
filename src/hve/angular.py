@@ -252,6 +252,12 @@ def circular_center(thetas: Sequence[int]) -> float:
 
     sin_sum = sum(math.sin(math.radians(t)) for t in thetas)
     cos_sum = sum(math.cos(math.radians(t)) for t in thetas)
+    norm = math.hypot(sin_sum, cos_sum)
+    if norm < 1e-10:
+        raise HVEError(
+            "circular_center is undefined: input angles cancel out "
+            "(perfectly symmetric distribution)"
+        )
     mean_deg = math.degrees(math.atan2(sin_sum, cos_sum))
     return mean_deg % 360.0
 

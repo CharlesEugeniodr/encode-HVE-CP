@@ -8,6 +8,7 @@ Deterministic mappers always emit confidence = 1.0 (exact table lookup).
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 from hve.core import HVEState, validate_state
 
@@ -30,7 +31,7 @@ class MappingResult:
     confidence: float
     mapper_id: str
     mapper_version: str
-    provenance: dict = field(default_factory=dict)
+    provenance: dict[str, Any] = field(default_factory=dict)
     alternatives: list[MappingResult] = field(default_factory=list)
 
     def __post_init__(self) -> None:

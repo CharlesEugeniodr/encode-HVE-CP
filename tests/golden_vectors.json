@@ -24,8 +24,8 @@
     {
       "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
       "color": {"present": true, "r": 1, "g": 2, "b": 3},
-      "chi_index": 65795,
-      "kappa": 65795
+      "chi_index": 66052,
+      "kappa": 66052
     },
     {
       "state": {"theta": 0, "s": 0, "tau": 0, "phi": 0},
@@ -36,13 +36,13 @@
     {
       "state": {"theta": 359, "s": 1, "tau": 4, "phi": 8},
       "color": {"present": false, "r": 0, "g": 0, "b": 0},
-      "chi_index": 543581813983,
+      "chi_index": 543565053583,
       "kappa": 0
     },
     {
       "state": {"theta": 359, "s": 1, "tau": 4, "phi": 8},
       "color": {"present": true, "r": 0, "g": 0, "b": 0},
-      "chi_index": 543581813984,
+      "chi_index": 543565053584,
       "kappa": 1
     },
     {

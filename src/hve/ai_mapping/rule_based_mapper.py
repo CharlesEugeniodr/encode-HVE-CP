@@ -3,7 +3,7 @@
 :class:`RuleBasedMapper` is a demonstration mapper that converts strings
 to HVE states using simple deterministic rules:
 
-* **θ** — string length mod 360
+* **θ** — upper bits of SHA-256 hash mod 360
 * **s** — 0 if the first character is uppercase, 1 otherwise
 * **τ** — string hash mod 5
 * **φ** — string hash mod 9
@@ -43,7 +43,7 @@ class RuleBasedMapper(AbstractMapper):
     """Map strings to HVE states via structural rules.
 
     Rules:
-        theta = len(text) % 360
+        theta = (sha256(text) >> 16) % 360
         s     = 0 if text[0].isupper() else 1
         tau   = stable_hash(text) % 5
         phi   = stable_hash(text) % 9
@@ -52,7 +52,6 @@ class RuleBasedMapper(AbstractMapper):
 
         mapper = RuleBasedMapper()
         result = mapper.map("Hello")
-        assert result.state.theta == 5       # len("Hello") % 360
         assert result.state.s == 0           # 'H'.isupper()
     """
 
@@ -91,7 +90,7 @@ class RuleBasedMapper(AbstractMapper):
 
         h = _stable_hash(input_data)
 
-        theta = len(input_data) % THETA_CARDINALITY
+        theta = (h >> 16) % THETA_CARDINALITY
         s = 0 if input_data[0].isupper() else 1
         tau = h % TAU_CARDINALITY
         phi = h % PHI_CARDINALITY
@@ -106,7 +105,7 @@ class RuleBasedMapper(AbstractMapper):
             provenance={
                 "method": "rule_based",
                 "rules": {
-                    "theta": "len(input) % 360",
+                    "theta": "(sha256(input) >> 16) % 360",
                     "s": "0 if input[0].isupper() else 1",
                     "tau": "sha256(input) % 5",
                     "phi": "sha256(input) % 9",

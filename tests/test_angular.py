@@ -214,11 +214,10 @@ class TestCircularMean:
         result = circular_mean([350, 10])
         assert result % 360.0 == pytest.approx(0.0, abs=0.5)
 
-    def test_uniform_quadrants(self) -> None:
-        # [0, 90, 180, 270] — sin/cos sums ≈ 0, atan2(0,0)=0
-        result = circular_mean([0, 90, 180, 270])
-        # Result is near-degenerate; just check it returns a float in [0, 360)
-        assert 0.0 <= result < 360.0
+    def test_uniform_quadrants_raises(self) -> None:
+        # [0, 90, 180, 270] — sin/cos sums ≈ 0, direction undefined
+        with pytest.raises(HVEError, match="cancel out"):
+            circular_mean([0, 90, 180, 270])
 
     def test_alias(self) -> None:
         angles = [30, 60]

@@ -1,4 +1,3 @@
-import sympy as sp
 from hve.core import encode_base, decode_base, HVEState
 
 
