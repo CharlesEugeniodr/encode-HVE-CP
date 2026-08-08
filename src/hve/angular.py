@@ -37,6 +37,11 @@ HALF_CYCLE: int = CYCLE_ORDER // 2            # 180
 DEFAULT_MICRO_DIVISIONS: int = 1_000
 DEFAULT_NANO_DIVISIONS: int = 1_080
 
+# Consistency asserts for hierarchical refinement
+assert DEFAULT_MICRO_DIVISIONS == 1_000, "MICRO_FACTOR must be 1,000"
+assert DEFAULT_NANO_DIVISIONS * DEFAULT_MICRO_DIVISIONS == 1_080_000, "NANO_TOTAL_FACTOR must be 1,080,000"
+
+
 
 # ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -589,3 +594,12 @@ def project_resolution(
     return value + (0,) * (target_len - expected_len)
 
 
+
+def verify_hierarchy() -> None:
+    """Run internal asserts to ensure hierarchical constants are correct.
+
+    Called by tests to guarantee that modifications do not break the
+    mathematical relationship between MICRO and NANO divisions.
+    """
+    assert DEFAULT_MICRO_DIVISIONS == 1_000
+    assert DEFAULT_NANO_DIVISIONS * DEFAULT_MICRO_DIVISIONS == 1_080_000
