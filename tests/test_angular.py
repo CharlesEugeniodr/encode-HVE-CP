@@ -212,7 +212,7 @@ class TestCircularMean:
     def test_symmetric_pair(self) -> None:
         # 350° and 10° → mean at 0° (which is ≡ 360° on the cycle)
         result = circular_mean([350, 10])
-        assert result % 360.0 == pytest.approx(0.0, abs=0.5)
+        assert result % 360.0 == pytest.approx(0.0, abs=1e-10)
 
     def test_uniform_quadrants_raises(self) -> None:
         # [0, 90, 180, 270] — sin/cos sums ≈ 0, direction undefined

@@ -91,7 +91,8 @@ def plot_state_space():
         angles = 2 * np.pi * values / card
         x = np.cos(angles)
         y = np.sin(angles)
-        colors = plt.cm.get_cmap(cmap)(values / max(card - 1, 1))
+        import matplotlib
+        colors = matplotlib.colormaps[cmap](values / max(card - 1, 1))
         ax.scatter(x, y, c=colors, s=200 / max(card / 10, 1), zorder=3, edgecolors="black", linewidths=0.5)
         for i, (xi, yi) in enumerate(zip(x, y)):
             if card <= 20:

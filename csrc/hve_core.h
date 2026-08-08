@@ -124,4 +124,26 @@ static inline uint16_t hve_circular_distance(uint16_t t1, uint16_t t2)
     return (d <= 180) ? d : (360 - d);
 }
 
+/* ── Sigma derivation ──────────────────────────────────────────────────
+ *
+ * The Python layer and canonical JSON expose a "sigma" field (±1).
+ * Sigma is NOT stored in hve_state_t because it is a pure derivation:
+ *
+ *     sigma(s) = 1 - 2*s        i.e.  s=0 → +1,  s=1 → -1
+ *     s(sigma) = (1 - sigma)/2  i.e.  +1 → s=0,  -1 → s=1
+ *
+ * This keeps the struct minimal while remaining interoperable with
+ * any implementation that uses sigma instead of s.
+ */
+
+static inline int8_t hve_get_sigma(const hve_state_t *st)
+{
+    return (int8_t)(1 - 2 * st->s);
+}
+
+static inline uint8_t hve_sigma_to_s(int8_t sigma)
+{
+    return (uint8_t)((1 - sigma) / 2);
+}
+
 #endif /* HVE_CORE_H */
